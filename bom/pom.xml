@@ -349,7 +349,7 @@
             <dependency>
                 <groupId>org.jbpm.jbpm3</groupId>
                 <artifactId>jbpm-jpdl</artifactId>
-                <version>3.2.10.SP3_seam2_hibernate5</version>
+                <version>3.2.10-1-SP3_seam2_hibernate5-SNAPSHOT</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.hibernate</groupId>
