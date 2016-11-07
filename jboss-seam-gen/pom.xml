@@ -12,26 +12,26 @@
    </parent>
 
    <build>
-   	<plugins>
-   		<plugin>
-   			<groupId>org.apache.maven.plugins</groupId>
-   			<artifactId>maven-assembly-plugin</artifactId>
-   			<executions>
-   				<execution>
-   					<id>distribution</id>
-   					<phase>package</phase>
-   					<goals>
-   						<goal>single</goal>
-   					</goals>
+       <plugins>
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-assembly-plugin</artifactId>
+               <executions>
+                   <execution>
+                       <id>distribution</id>
+                       <phase>package</phase>
+                       <goals>
+                           <goal>single</goal>
+                       </goals>
                  <configuration>
                     <descriptors>
                        <descriptor>src/main/assembly/assembly.xml</descriptor>
                     </descriptors>
                  </configuration>
-   				</execution>
-   			</executions>
-   		</plugin>
-   		<plugin>
+                   </execution>
+               </executions>
+           </plugin>
+           <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
         <executions>
@@ -63,13 +63,48 @@
           </execution>
         </executions>
       </plugin>
-   	</plugins>
+       </plugins>
+       <pluginManagement>
+           <plugins>
+               <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+               <plugin>
+                   <groupId>org.eclipse.m2e</groupId>
+                   <artifactId>lifecycle-mapping</artifactId>
+                   <version>1.0.0</version>
+                   <configuration>
+                       <lifecycleMappingMetadata>
+                           <pluginExecutions>
+                               <pluginExecution>
+                                   <pluginExecutionFilter>
+                                       <groupId>
+                                           org.apache.maven.plugins
+                                       </groupId>
+                                       <artifactId>
+                                           maven-antrun-plugin
+                                       </artifactId>
+                                       <versionRange>
+                                           [1.7,)
+                                       </versionRange>
+                                       <goals>
+                                           <goal>run</goal>
+                                       </goals>
+                                   </pluginExecutionFilter>
+                                   <action>
+                                       <execute></execute>
+                                   </action>
+                               </pluginExecution>
+                           </pluginExecutions>
+                       </lifecycleMappingMetadata>
+                   </configuration>
+               </plugin>
+           </plugins>
+       </pluginManagement>
    </build>
-   
+
    <properties>
 
    </properties>
-       
+
    <dependencies>
 
       <!-- version runtime dependencies are managed only here instead in parent -->
@@ -93,14 +128,14 @@
          <version>5.0.10.Final</version>
          <scope>runtime</scope>
       </dependency>
-      
+
       <dependency>
          <groupId>org.hibernate.javax.persistence</groupId>
          <artifactId>hibernate-jpa-2.1-api</artifactId>
          <version>1.0.0.Final</version>
          <scope>runtime</scope>
       </dependency>
-      
+
       <dependency>
          <groupId>commons-logging</groupId>
          <artifactId>commons-logging</artifactId>
@@ -114,7 +149,7 @@
          <version>2.3.8</version>
          <scope>runtime</scope>
       </dependency>
-      
+
       <dependency>
          <groupId>org.eclipse.core</groupId>
          <artifactId>runtime</artifactId>
@@ -147,14 +182,14 @@
             </exclusion>
          </exclusions>
       </dependency>
-      
+
       <dependency>
          <groupId>org.eclipse.equinox</groupId>
          <artifactId>common</artifactId>
          <version>3.6.200-v20130402-1505</version>
          <scope>runtime</scope>
       </dependency>
-      
+
       <dependency>
          <groupId>org.eclipse</groupId>
          <artifactId>text</artifactId>
@@ -179,12 +214,12 @@
       </dependency>
 
       <dependency>
-      	<groupId>org.apache.ant</groupId>
-      	<artifactId>ant</artifactId>
-      	<type>jar</type>
-      	<scope>compile</scope>
+          <groupId>org.apache.ant</groupId>
+          <artifactId>ant</artifactId>
+          <type>jar</type>
+          <scope>compile</scope>
       </dependency>
-      
+
       <dependency>
         <groupId>org.apache.ant</groupId>
         <artifactId>ant-launcher</artifactId>
@@ -192,7 +227,7 @@
         <type>jar</type>
         <scope>runtime</scope>
       </dependency>
-      
+
       <dependency>
         <groupId>org.apache.ant</groupId>
         <artifactId>ant-nodeps</artifactId>
@@ -219,5 +254,5 @@
             </build>
         </profile>
     </profiles>
-    
+
 </project>

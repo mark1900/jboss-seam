@@ -101,8 +101,40 @@
                                 </goals>
                              </pluginExecutionFilter>
                              <action>
-                                <ignore />
+                                <execute></execute>
                              </action>
+                          </pluginExecution>
+                          <pluginExecution>
+                              <pluginExecutionFilter>
+                                  <groupId>org.richfaces.cdk</groupId>
+                                  <artifactId>
+                                      richfaces-cdk-maven-plugin
+                                  </artifactId>
+                                  <versionRange>
+                                      [4.5.0.Final,)
+                                  </versionRange>
+                                  <goals>
+                                      <goal>generate</goal>
+                                  </goals>
+                              </pluginExecutionFilter>
+                              <action>
+                                  <execute></execute>
+                              </action>
+                          </pluginExecution>
+                          <pluginExecution>
+                              <pluginExecutionFilter>
+                                  <groupId>org.jboss.seam</groupId>
+                                  <artifactId>
+                                      seam-cdk-helper
+                                  </artifactId>
+                                  <versionRange>[1.0.1,)</versionRange>
+                                  <goals>
+                                      <goal>execute</goal>
+                                  </goals>
+                              </pluginExecutionFilter>
+                              <action>
+                                  <execute></execute>
+                              </action>
                           </pluginExecution>
                        </pluginExecutions>
                     </lifecycleMappingMetadata>
