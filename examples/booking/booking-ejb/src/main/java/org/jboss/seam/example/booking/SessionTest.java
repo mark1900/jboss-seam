@@ -1,6 +1,3 @@
-/**
- * Copyright (c) 2014 Impact Mobile Inc.
- */
 package org.jboss.seam.example.booking;
 
 import org.jboss.seam.ScopeType;
