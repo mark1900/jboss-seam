@@ -32,7 +32,7 @@
         <version.war.plugin>2.1.1</version.war.plugin>
         <version.ejb.plugin>2.3</version.ejb.plugin>
         <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
-        <version.org.jboss.spec.javax.faces>2.2.7</version.org.jboss.spec.javax.faces>
+        <version.org.jboss.spec.javax.faces>2.2.13</version.org.jboss.spec.javax.faces>
     </properties>
 
     <modules>

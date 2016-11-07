@@ -4,15 +4,19 @@
       <jms-destinations>
             <jms-topic name="seamTestTopic">
                 <entry name="topic/seamTest"/>
+                <entry name="java:jboss/exported/jms/topic/seamTest"/>
             </jms-topic>
             <jms-queue name="seamTestQueue">
                 <entry name="queue/seamTest"/>
+                <entry name="java:jboss/exported/jms/queue/seamTest"/>
             </jms-queue>
             <jms-topic name="testTopic">
                 <entry name="topic/testTopic"/>
+                <entry name="java:jboss/exported/jms/topic/testTopic"/>
             </jms-topic>
             <jms-queue name="testQueue">
                 <entry name="queue/testQueue"/>
+                <entry name="java:jboss/exported/jms/queue/testQueue"/>
             </jms-queue>
        </jms-destinations>
    </server>

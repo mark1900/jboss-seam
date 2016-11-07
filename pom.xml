@@ -49,6 +49,7 @@
         <version.jbossas7>7.2.0.Final</version.jbossas7>
         <version.wildfly>10.1.0.Final</version.wildfly>
         <version.emma>2.0.5312</version.emma>
+        <version.jsf.impl>2.2.13</version.jsf.impl>
         <version.richfaces.cdk>4.5.0.Final</version.richfaces.cdk>
         <version.richfaces>4.5.0.Final</version.richfaces>
 
@@ -262,9 +263,9 @@
             <dependency>
                 <groupId>com.sun.faces</groupId>
                 <artifactId>jsf-impl</artifactId>
+                <version>${version.jsf.impl}</version>
                 <optional>true</optional>
                 <scope>provided</scope>
-                <version>2.2.6</version>
             </dependency>
 
             <dependency>

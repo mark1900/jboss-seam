@@ -8,8 +8,8 @@
       <format>zip</format>
    </formats>
    <includeBaseDirectory>false</includeBaseDirectory>
-  
-   
+
+
    <!-- Add distribution files -->
    <fileSets>
       <fileSet>
@@ -20,31 +20,30 @@
          </excludes>
       </fileSet>
    </fileSets>
-	<dependencySets>
-		<dependencySet>
-			<outputDirectory>lib</outputDirectory>
-			<useProjectArtifact>false</useProjectArtifact>
-			<useStrictFiltering>true</useStrictFiltering>
-			<useTransitiveDependencies>true</useTransitiveDependencies>
-			<includes>				
-				<include>org.hibernate:hibernate-tools:jar</include>
-				<include>org.hibernate:hibernate-core:jar</include>
-				<include>org.hibernate:hibernate-entitymanager:jar</include>
-				<include>commons-collections:commons-collections:jar</include>
-				<include>commons-logging:commons-logging:jar</include>
-				<include>org.hibernate:jtidy:jar</include>
-				<include>freemarker:freemarker:jar</include>
-				<include>org.eclipse.jdt:core:jar</include>
-				<include>org.eclipse.core:runtime:jar</include>
-				<include>org.eclipse.equinox:common:jar</include>
-				<include>org.eclipse:text:jar</include>
-				<include>antlr:antlr:jar</include>
-            	<include>org.apache.ant:ant:jar</include>
-            	<include>org.apache.ant:ant-nodeps:jar</include>
-            	<include>org.apache.ant:ant-launcher:jar</include>
-			</includes>
-			<outputFileNameMapping>${artifact.artifactId}.${artifact.extension}
-			</outputFileNameMapping>
-		</dependencySet>
-	</dependencySets>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
+            <useStrictFiltering>true</useStrictFiltering>
+            <useTransitiveDependencies>true</useTransitiveDependencies>
+            <includes>
+                <include>org.hibernate:hibernate-tools:jar</include>
+                <include>org.hibernate:hibernate-core:jar</include>
+                <include>org.hibernate:hibernate-entitymanager:jar</include>
+                <include>commons-logging:commons-logging:jar</include>
+                <include>org.hibernate:jtidy:jar</include>
+                <include>freemarker:freemarker:jar</include>
+                <include>org.eclipse.tycho:org.eclipse.jdt.core:jar</include>
+                <include>org.eclipse.core:runtime:jar</include>
+                <include>org.eclipse.equinox:common:jar</include>
+                <include>org.eclipse:text:jar</include>
+                <include>antlr:antlr:jar</include>
+                <include>org.apache.ant:ant:jar</include>
+                <include>org.apache.ant:ant-nodeps:jar</include>
+                <include>org.apache.ant:ant-launcher:jar</include>
+            </includes>
+            <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}
+            </outputFileNameMapping>
+        </dependencySet>
+    </dependencySets>
  </assembly>
