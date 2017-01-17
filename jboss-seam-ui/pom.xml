@@ -41,18 +41,18 @@
             </plugin>
             <!-- This need to be after Richfaces CDK plugin -->
             <plugin>
-               <groupId>org.jboss.seam</groupId>
-               <artifactId>seam-cdk-helper</artifactId>
-               <version>1.0.1</version>
-               <executions>
-                  <execution>
-                     <phase>generate-sources</phase>
-                     <goals>
-                        <goal>execute</goal>
-                     </goals>
-                  </execution>
-               </executions>
-            </plugin>
+                <groupId>org.jboss.seam</groupId>
+                <artifactId>seam-cdk-helper</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> 
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
@@ -179,11 +179,11 @@
             <optional>true</optional>
         </dependency>
 
-<!--         <dependency> -->
-<!--             <groupId>org.jboss.spec.javax.el</groupId> -->
-<!--             <artifactId>jboss-el-api_2.2_spec</artifactId> -->
-<!--             <scope>provided</scope> -->
-<!--         </dependency> -->
+        <!--         <dependency> -->
+        <!--             <groupId>org.jboss.spec.javax.el</groupId> -->
+        <!--             <artifactId>jboss-el-api_2.2_spec</artifactId> -->
+        <!--             <scope>provided</scope> -->
+        <!--         </dependency> -->
 
 
         <dependency>
@@ -197,6 +197,7 @@
             <artifactId>testng</artifactId>
             <scope>test</scope>
         </dependency>
+        
     </dependencies>
     <profiles>
         <profile>
@@ -257,7 +258,7 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>xml-maven-plugin</artifactId>
                         <configuration>
-                           <catalogs>
+                            <catalogs>
                                 <catalog>../jboss-seam/src/main/resources/org/jboss/seam/catalog.xml</catalog>
                             </catalogs>
                             <validationSets>

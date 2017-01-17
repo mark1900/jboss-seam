@@ -1,5 +1,7 @@
 package org.jboss.seam.ui.facelet;
 
+import com.sun.faces.application.ApplicationAssociate;
+import com.sun.faces.facelets.impl.DefaultFaceletFactory;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.ref.WeakReference;
@@ -18,7 +20,6 @@ import org.jboss.seam.mock.MockHttpServletRequest;
 import org.jboss.seam.mock.MockHttpServletResponse;
 import org.jboss.seam.ui.util.JSF;
 
-import com.sun.faces.application.ApplicationAssociate;
 
 public class RendererRequest
 {
@@ -125,8 +126,12 @@ public class RendererRequest
       {
          throw new IllegalArgumentException("resource doesn't exist: " + viewId);
       }
-      return ApplicationAssociate.getCurrentInstance().getFaceletFactory().getFacelet(facesContext, viewId);
+      return getFaceletFactory().getFacelet(facesContext, url);
    }
+
+   private DefaultFaceletFactory getFaceletFactory() {
+        return ApplicationAssociate.getCurrentInstance().getFaceletFactory();
+    }
 
    /**
     * Render a Facelet
