@@ -65,8 +65,8 @@
 
     <dependencyManagement>
         <!-- Used to specify which version of a dependency to use - this means
-            that versions are only specified here, not in sub project poms. All dependencies
-            for all modules should be listed out here -->
+        that versions are only specified here, not in sub project poms. All dependencies
+        for all modules should be listed out here -->
         <dependencies>
 
             <dependency>
@@ -281,12 +281,12 @@
             </dependency>
 
             <dependency>
-               <groupId>org.richfaces</groupId>
-               <artifactId>richfaces-distribution</artifactId>
-               <version>${version.richfaces}</version>
-               <type>pom</type>
-           </dependency>
-          <dependency>
+                <groupId>org.richfaces</groupId>
+                <artifactId>richfaces-distribution</artifactId>
+                <version>${version.richfaces}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
                 <groupId>org.richfaces.core</groupId>
                 <artifactId>richfaces-core-impl</artifactId>
                 <version>${version.richfaces}</version>
@@ -320,8 +320,8 @@
         <connection>scm:git:git@github.com:seam2/jboss-seam.git</connection>
         <developerConnection>scm:git:git@github.com:seam2/jboss-seam.git</developerConnection>
         <url>scm:git:git@github.com:seam2/jboss-seam.git</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <organization>
         <name>Seam Framework</name>
@@ -347,6 +347,15 @@
         <finalName>${project.artifactId}</finalName>
         <pluginManagement>
             <plugins>
+                <!-- disables new java 8 doclint feature which breaks javadoc -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <configuration>
+                        <additionalparam>-Xdoclint:none</additionalparam>
+                    </configuration>
+                </plugin>
+                
                 <!-- just for jboss-seam core as it is EJB type not jar -->
                 <plugin>
                     <artifactId>maven-ejb-plugin</artifactId>
@@ -386,234 +395,234 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
-<!-- execution is defined already in org.jboss:jboss-parent -->
+                <!-- execution is defined already in org.jboss:jboss-parent -->
                 <executions>
                     <execution>
                         <id>attach-sources</id>
                         <phase>package</phase>
-<!-- 						<goals> -->
-<!-- 							<goal>jar</goal> -->
-<!-- 						</goals> -->
+                        <!-- 						<goals> -->
+                        <!-- 							<goal>jar</goal> -->
+                        <!-- 						</goals> -->
                     </execution>
                 </executions>
             </plugin>
 
             <!-- Packaging -->
             <plugin>
-               <artifactId>maven-jar-plugin</artifactId>
-               <configuration>
-                   <archive>
-                       <manifest>
-                           <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                           <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                       </manifest>
-                       <manifestEntries>
-                         <Seam-Version>${project.version}</Seam-Version>
-                       </manifestEntries>
-                   </archive>
-               </configuration>
-           </plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Seam-Version>${project.version}</Seam-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
 
-           <plugin>
-               <artifactId>maven-war-plugin</artifactId>
-               <inherited>true</inherited>
-               <configuration>
-                   <failOnMissingWebXml>false</failOnMissingWebXml>
-                   <warName>${project.build.finalName}</warName>
-               </configuration>
-           </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <inherited>true</inherited>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <warName>${project.build.finalName}</warName>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
-   <modules>
-      <module>bom</module>
-      <module>jboss-seam</module>
-      <module>jboss-seam-ui</module>
-      <module>jboss-seam-debug</module>
-      <module>jboss-seam-gen</module>
-      <module>jboss-seam-excel</module>
-      <module>jboss-seam-flex</module>
-      <module>jboss-seam-mail</module>
-      <module>jboss-seam-pdf</module>
-      <module>jboss-seam-remoting</module>
-      <module>jboss-seam-resteasy</module>
-      <module>jboss-seam-rss</module>
-      <module>jboss-seam-wicket</module>
-      <module>jboss-seam-ioc</module>
-      <module>functional-tests</module>
-      <module>seam-integration-tests</module>
-   </modules>
+    <modules>
+        <module>bom</module>
+        <module>jboss-seam</module>
+        <module>jboss-seam-ui</module>
+        <module>jboss-seam-debug</module>
+        <module>jboss-seam-gen</module>
+        <module>jboss-seam-excel</module>
+        <module>jboss-seam-flex</module>
+        <module>jboss-seam-mail</module>
+        <module>jboss-seam-pdf</module>
+        <module>jboss-seam-remoting</module>
+        <module>jboss-seam-resteasy</module>
+        <module>jboss-seam-rss</module>
+        <module>jboss-seam-wicket</module>
+        <module>jboss-seam-ioc</module>
+        <module>functional-tests</module>
+        <module>seam-integration-tests</module>
+    </modules>
 
     <profiles>
-       <!-- Profile for generating Seam reference documentation  -->
-       <profile>
-           <id>doc</id>
-           <modules>
-               <module>seam-reference-guide</module>
-           </modules>
-       </profile>
-       <profile>
-           <id>all</id>
-           <modules>
-               <module>examples</module>
-               <module>seam-reference-guide</module>
-               <module>distribution</module>
-           </modules>
-       </profile>
-       <profile>
-           <id>distribution</id>
-           <modules>
-               <module>seam-reference-guide</module>
-               <module>distribution</module>
-           </modules>
-       </profile>
-       <profile>
-         <id>code-coverage</id>
-         <activation>
-            <property>
-               <name>code-coverage</name>
-            </property>
-         </activation>
-         <dependencies>
-            <dependency>
-                <groupId>emma</groupId>
-                <artifactId>emma</artifactId>
-                <version>${version.emma}</version>
-            </dependency>
-         </dependencies>
-         <build>
-            <pluginManagement>
-               <plugins>
-                  <plugin>
-                     <groupId>org.codehaus.mojo</groupId>
-                     <artifactId>emma-maven-plugin</artifactId>
-                     <version>1.0-alpha-2</version>
-                     <executions>
-                        <execution>
-                           <id>instrumentation</id>
-                           <phase>process-classes</phase>
-                           <goals>
-                              <goal>instrument</goal>
-                           </goals>
-                           <configuration>
-                              <verbose>true</verbose>
-                           </configuration>
-                        </execution>
-                        <execution>
-                           <id>instrumentation-clean</id>
-                           <phase>clean</phase>
-                           <goals>
-                              <goal>clean</goal>
-                           </goals>
-                        </execution>
-                     </executions>
-                  </plugin>
-                  <plugin>
-                      <artifactId>maven-antrun-plugin</artifactId>
-                      <executions>
-                         <execution>
-                            <id>complete-classpath-for-tests</id>
-                            <phase>process-classes</phase>
-                            <goals>
-                               <goal>run</goal>
-                            </goals>
+        <!-- Profile for generating Seam reference documentation  -->
+        <profile>
+            <id>doc</id>
+            <modules>
+                <module>seam-reference-guide</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>all</id>
+            <modules>
+                <module>examples</module>
+                <module>seam-reference-guide</module>
+                <module>distribution</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>distribution</id>
+            <modules>
+                <module>seam-reference-guide</module>
+                <module>distribution</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>code-coverage</id>
+            <activation>
+                <property>
+                    <name>code-coverage</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>emma</groupId>
+                    <artifactId>emma</artifactId>
+                    <version>${version.emma}</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>emma-maven-plugin</artifactId>
+                            <version>1.0-alpha-2</version>
+                            <executions>
+                                <execution>
+                                    <id>instrumentation</id>
+                                    <phase>process-classes</phase>
+                                    <goals>
+                                        <goal>instrument</goal>
+                                    </goals>
+                                    <configuration>
+                                        <verbose>true</verbose>
+                                    </configuration>
+                                </execution>
+                                <execution>
+                                    <id>instrumentation-clean</id>
+                                    <phase>clean</phase>
+                                    <goals>
+                                        <goal>clean</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-antrun-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>complete-classpath-for-tests</id>
+                                    <phase>process-classes</phase>
+                                    <goals>
+                                        <goal>run</goal>
+                                    </goals>
+                                    <configuration>
+                                        <tasks>
+                                            <copy todir="${project.build.directory}/classes" overwrite="true">
+                                                <fileset dir="${project.build.directory}/generated-classes/emma/classes">
+                                                    <include name="**/*" />
+                                                </fileset>
+                                            </copy>
+                                        </tasks>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-surefire-plugin</artifactId>
+                            <inherited>true</inherited>
                             <configuration>
-                               <tasks>
-                                  <copy todir="${project.build.directory}/classes" overwrite="true">
-                                     <fileset dir="${project.build.directory}/generated-classes/emma/classes">
-                                        <include name="**/*" />
-                                     </fileset>
-                                  </copy>
-                               </tasks>
+                                <forkMode>once</forkMode>
+                                <classesDirectory>${project.build.outputDirectory}</classesDirectory>
                             </configuration>
-                         </execution>
-                      </executions>
-                  </plugin>
-                  <plugin>
-                     <artifactId>maven-surefire-plugin</artifactId>
-                     <inherited>true</inherited>
-                     <configuration>
-                        <forkMode>once</forkMode>
-                        <classesDirectory>${project.build.outputDirectory}</classesDirectory>
-                     </configuration>
-                  </plugin>
-                  <plugin>
-                     <groupId>org.sonatype.maven.plugin</groupId>
-                     <artifactId>emma4it-maven-plugin</artifactId>
-                     <version>1.3</version>
-                     <executions>
-                        <execution>
-                           <id>report</id>
-                           <phase>test</phase>
-                           <goals>
-                              <goal>report</goal>
-                           </goals>
-                           <configuration>
-                              <sourceSets>
-                                 <sourceSet>
-                                    <directory>${project.build.sourceDirectory}</directory>
-                                 </sourceSet>
-                              </sourceSets>
-                           </configuration>
-                        </execution>
-                     </executions>
-                  </plugin>
-                  <plugin>
-                     <artifactId>maven-clean-plugin</artifactId>
-                     <configuration>
-                        <filesets>
-                           <fileset>
-                              <directory>${basedir}/</directory>
-                              <includes>
-                                 <include>**/*.ec</include>
-                                 <include>**/*.em</include>
-                              </includes>
-                              <followSymlinks>false</followSymlinks>
-                           </fileset>
-                        </filesets>
-                     </configuration>
-                  </plugin>
-               </plugins>
-            </pluginManagement>
-         </build>
-      </profile>
-      <profile>
-        <id>release</id>
-        <build>
-            <plugins>
-                <plugin>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <configuration>
-                      <stagingRepository>https://repository.jboss.org/nexus/content/groups/staging</stagingRepository>
-                      <tagNameFormat>JBoss_Seam_@{project.version}</tagNameFormat>
-                      <autoVersionSubmodules>true</autoVersionSubmodules>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </build>
-      </profile>
-
-      <profile>
-        <id>validate</id>
-        <build>
-            <pluginManagement>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.sonatype.maven.plugin</groupId>
+                            <artifactId>emma4it-maven-plugin</artifactId>
+                            <version>1.3</version>
+                            <executions>
+                                <execution>
+                                    <id>report</id>
+                                    <phase>test</phase>
+                                    <goals>
+                                        <goal>report</goal>
+                                    </goals>
+                                    <configuration>
+                                        <sourceSets>
+                                            <sourceSet>
+                                                <directory>${project.build.sourceDirectory}</directory>
+                                            </sourceSet>
+                                        </sourceSets>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-clean-plugin</artifactId>
+                            <configuration>
+                                <filesets>
+                                    <fileset>
+                                        <directory>${basedir}/</directory>
+                                        <includes>
+                                            <include>**/*.ec</include>
+                                            <include>**/*.em</include>
+                                        </includes>
+                                        <followSymlinks>false</followSymlinks>
+                                    </fileset>
+                                </filesets>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+        <profile>
+            <id>release</id>
+            <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>xml-maven-plugin</artifactId>
-                        <version>1.0</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>validate</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <configuration>
+                            <stagingRepository>https://repository.jboss.org/nexus/content/groups/staging</stagingRepository>
+                            <tagNameFormat>JBoss_Seam_@{project.version}</tagNameFormat>
+                            <autoVersionSubmodules>true</autoVersionSubmodules>
+                        </configuration>
                     </plugin>
                 </plugins>
-            </pluginManagement>
-        </build>
-      </profile>
+            </build>
+        </profile>
+
+        <profile>
+            <id>validate</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>xml-maven-plugin</artifactId>
+                            <version>1.0</version>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>validate</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
     </profiles>
 
 </project>

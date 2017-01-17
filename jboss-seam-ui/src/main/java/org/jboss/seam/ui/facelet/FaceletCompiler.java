@@ -20,12 +20,12 @@ import com.sun.faces.facelets.compiler.SAXCompiler;
 @Scope(APPLICATION)
 @BypassInterceptors
 @AutoCreate
-@Install(value = true, precedence = Install.BUILT_IN, classDependencies="com.sun.faces.facelets.Facelet")
+@Install(value = true, precedence = Install.BUILT_IN, classDependencies="com.sun.faces.application.ApplicationAssociate")
 public class FaceletCompiler
 {
-   
+
    private com.sun.faces.facelets.compiler.Compiler compiler;
-   
+
    @Create
    public void create()
    {
@@ -34,20 +34,20 @@ public class FaceletCompiler
 	   {
 		   compiler = applicationAssociate.getCompiler();
 	   }
-	   else 
+	   else
 	   {
 		   // TODO: this requires to initialize custom tag library
 		   compiler = new SAXCompiler();
 	   }
    }
-     
-   
+
+
    @Unwrap
    public com.sun.faces.facelets.compiler.Compiler unwrap()
    {
       return compiler;
    }
-   
+
    public static com.sun.faces.facelets.compiler.Compiler instance()
    {
       if ( !Contexts.isApplicationContextActive() )
@@ -56,6 +56,5 @@ public class FaceletCompiler
       }
       return (com.sun.faces.facelets.compiler.Compiler) Component.getInstance(FaceletCompiler.class, ScopeType.APPLICATION);
    }
-   
-}
 
+}
