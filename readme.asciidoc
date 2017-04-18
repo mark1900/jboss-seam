@@ -27,12 +27,33 @@ Be warned that JBoss Embedded is *LEGACY runtime* and is not in Seam 2.3 distrib
 
 Wildfly Support
 ~~~~~~~~~~~~~~~
-This link:https://github.com/mark1900/jboss-seam/tree/seam_2_3-wildfly_10_1_0_Final[branch] attempts to update Seam 2.3 to support JEE 7, JSF 2.2, Servlet 3.1, RESTEasy 3.0.19 and run properly on Wildfly 10.1.0.Final.
 
-This link:https://github.com/mark1900/jboss-seam/tree/seam_2_3-wildfly_10_1_0_Final[branch] also depends on a customized release of link:https://github.com/mark1900/jbpm3-seam/tree/3.2.10.SP3_seam2_hibernate5[jbpm3] and link:https://github.com/mark1900/jbpm3-seam/tree/3.2.10.SP3_seam2_hibernate5/projects/jsf-console-3.2.10-seam[jsf-console].
+This link:https://github.com/mark1900/jboss-seam/tree/seam_2_3-wildfly_10_1_0_Final[branch] attempts to update Seam 2.3 to support JEE 7, JSF 2.2, Servlet 3.1, RESTEasy 3.0.19 and target Wildfly 10.1.0.Final.
+
+This is an unofficial modification of Seam 2.3 and related libraries.
+
+Source Code
+^^^^^^^^^^^
+
+* https://github.com/mark1900/jboss-seam/tree/seam_2_3-wildfly_10_1_0_Final 
+** is forked from https://github.com/andrewscode/jboss-seam/tree/seam_2_3-jee7 
+** is forked from https://github.com/seam2/jboss-seam 
+** is forked from https://github.com/mareknovotny/jboss-seam
+* https://github.com/mark1900/jbpm3-seam 
+** is forked from https://github.com/mareknovotny/jbpm3-seam
+
+Components
+^^^^^^^^^^
+
+Please note, that you will need to build and release the following components into your local environment, in the following order.
+
+. *jbpm3-seam* - https://github.com/mark1900/jbpm3-seam/tree/3.2.10.SP3_seam2_hibernate5
+. *jsf-console* - https://github.com/mark1900/jbpm3-seam/tree/3.2.10.SP3_seam2_hibernate5/projects/jsf-console-3.2.10-seam
+. *jboss-seam* - https://github.com/mark1900/jboss-seam/tree/seam_2_3-wildfly_10_1_0_Final
 
 
-*Building and Releasing the Components*
+Building and Releasing the Components
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * *jbpm3-seam* - https://github.com/mark1900/jbpm3-seam/tree/3.2.10.SP3_seam2_hibernate5
 
