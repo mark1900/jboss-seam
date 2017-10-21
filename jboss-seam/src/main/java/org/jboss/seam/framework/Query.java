@@ -240,34 +240,78 @@ public abstract class Query<T, E>
    
    protected String getRenderedEjbql()
    {
-      StringBuilder builder = new StringBuilder().append(parsedEjbql);
-      
-      for (int i=0; i<getRestrictions().size(); i++)
-      {
-         Object parameterValue = restrictionParameters.get(i).getValue();
-         if ( isRestrictionParameterSet(parameterValue) )
-         {
-            if ( WHERE_PATTERN.matcher(builder).find() )
-            {
-               builder.append(" ").append(getRestrictionLogicOperator()).append(" ");
-            }
-            else
-            {
-               builder.append(" where ");
-            }
-            builder.append( parsedRestrictions.get(i) );
-         }
-      }
-      
-      if (getGroupBy()!=null) {
-          builder.append(" group by ").append(getGroupBy());
-      }
+       StringBuilder builder = new StringBuilder().append(parsedEjbql);
+       StringBuilder restrictions = new StringBuilder();
+       boolean hasRestriction = false;
+       int counter = 0;
+       for (int i = 0; i < getRestrictions().size(); i++)
+       {
+           Object parameterValue = restrictionParameters.get(i).getValue();
+           if (isRestrictionParameterSet(parameterValue))
+           {
+               hasRestriction = true;
+               if (WHERE_PATTERN.matcher(builder).find())
+               {
+                   if (isGroupOperand() && counter > 0)
+                       restrictions.append(" ").append(getRestrictionLogicOperator()).append(" ");
+                   if (isGroupOperand() == false)
+                       restrictions.append(" ").append(getRestrictionLogicOperator()).append(" ");
+               }
+               else
+               {
+                   builder.append(" where ");
+               }
+               restrictions.append(parsedRestrictions.get(i));
+               counter++;
+           }
+       }
+       if (WHERE_PATTERN.matcher(builder).find())
+       {
+           if (isGroupOperand() && hasRestriction)
+           {
+               builder.append(" ").append(getGroupLogicOperator()).append(" ( ");
+           }
+       }
 
-      if (getOrder()!=null) {
-          builder.append(" order by ").append( getOrder() );
-      }
-      
-      return builder.toString();
+       if (hasRestriction)
+           builder.append(restrictions);
+
+       if (WHERE_PATTERN.matcher(builder).find())
+       {
+           if (isGroupOperand() && hasRestriction)
+           {
+               builder.append(" ) ");
+           }
+       }
+
+       if (getGroupBy() != null)
+       {
+           builder.append(" group by ").append(getGroupBy());
+       }
+
+       if (getOrder() != null)
+       {
+           builder.append(" order by ").append(getOrder());
+       }
+
+       return builder.toString();
+   }
+   
+   protected boolean isGroupOperand()
+   {
+       return getGroupLogicOperator() != null && getGroupLogicOperator().trim().length() > 0;
+   }
+   
+   private String groupLogicOperator;
+
+   public String getGroupLogicOperator()
+   {
+       return groupLogicOperator;
+   }
+
+   public void setGroupLogicOperator(String groupLogicOperator)
+   {
+       this.groupLogicOperator = groupLogicOperator;
    }
    
    protected boolean isRestrictionParameterSet(Object parameterValue)

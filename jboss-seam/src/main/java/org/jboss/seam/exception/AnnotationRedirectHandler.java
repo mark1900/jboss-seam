@@ -46,4 +46,11 @@ public class AnnotationRedirectHandler extends RedirectHandler
       return e.getClass().getAnnotation(Redirect.class).end();
    }
    
+   
+   @Override
+   protected boolean includePageParameters(Exception e)
+   {
+       return e.getClass().getAnnotation(Redirect.class).includePageParameters();
+   }
+   
 }
