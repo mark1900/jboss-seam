@@ -385,9 +385,14 @@ public class Jbpm
    {
       public ProcessDefinition findSubProcess(Element element)
       {
-         String subProcessName = element.attributeValue("name");
-         ProcessDefinition pageflow = pageflowProcessDefinitions.get(subProcessName);
-         return pageflow==null ? DB_SUB_PROCESS_RESOLVER.findSubProcess(element) : pageflow;
+          String subProcessName = element.attributeValue("name");
+          ProcessDefinition pageflow = pageflowProcessDefinitions.get(subProcessName);
+          if(pageflow != null)
+              return pageflow;
+          SeamExpressionSubProcessResolver SEAM_SUB_PROCESS_RESOLVER = SeamExpressionSubProcessResolver.instance();
+          if(SEAM_SUB_PROCESS_RESOLVER != null)
+              return SEAM_SUB_PROCESS_RESOLVER.findSubProcess(element);
+          return DB_SUB_PROCESS_RESOLVER.findSubProcess(element);
       }
    }
 

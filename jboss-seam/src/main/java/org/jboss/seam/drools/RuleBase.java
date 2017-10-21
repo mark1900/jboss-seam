@@ -4,12 +4,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import javassist.util.proxy.ProxyFactory;
+
 import org.drools.RuleBaseConfiguration;
 import org.drools.RuleBaseFactory;
 import org.drools.compiler.DroolsError;
 import org.drools.compiler.PackageBuilder;
 import org.drools.compiler.PackageBuilderConfiguration;
 import org.drools.compiler.RuleBuildError;
+import org.drools.conf.ConsequenceExceptionHandlerOption;
 import org.drools.spi.ConsequenceExceptionHandler;
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Create;
@@ -107,10 +110,14 @@ public class RuleBase
       
       if(consequenceExceptionHandler != null) 
       {
-         log.debug("adding consequence exception handler: " + consequenceExceptionHandler.getExpressionString());
-         RuleBaseConfiguration rbconf = new RuleBaseConfiguration();
-         rbconf.setConsequenceExceptionHandler(consequenceExceptionHandler.getValue().toString());
-         ruleBase = RuleBaseFactory.newRuleBase( rbconf );
+          log.debug("adding consequence exception handler: " + consequenceExceptionHandler.getExpressionString());
+          Class handlerClz = consequenceExceptionHandler.getValue().getClass();
+          if (ProxyFactory.isProxyClass(consequenceExceptionHandler.getValue().getClass()))
+              handlerClz = consequenceExceptionHandler.getValue().getClass().getSuperclass();
+          RuleBaseConfiguration rbconf = new RuleBaseConfiguration();
+          ConsequenceExceptionHandlerOption cehOption = ConsequenceExceptionHandlerOption.get(handlerClz);
+          rbconf.setOption(cehOption);
+          ruleBase = RuleBaseFactory.newRuleBase(rbconf);
       }
       else 
       {

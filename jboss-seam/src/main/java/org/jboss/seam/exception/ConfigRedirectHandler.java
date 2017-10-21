@@ -18,24 +18,28 @@ public final class ConfigRedirectHandler extends RedirectHandler
    private final boolean conversation;
    private final String message;
    private final Severity messageSeverity;
+   private final boolean includePageParameters;
 
-   /**
-    * Construct a ConfigRedirectHandler.
-    * 
-    */
-   public ConfigRedirectHandler(ValueExpression<String> id, Class clazz, boolean conversation, String message, Severity messageSeverity)
-   {
-      this.id = id;
-      this.clazz = clazz;
-      this.conversation = conversation;
-      this.message = message;
-      this.messageSeverity = messageSeverity;
-   }
    
-   @Deprecated
-   public ConfigRedirectHandler(String id, Class clazz, boolean conversation, String message, Severity messageSeverity)
+   
+   public ConfigRedirectHandler(ValueExpression<String> id, Class clazz, boolean conversation, String message, Severity messageSeverity,
+        boolean includePageParameters)
+    {
+        this.id = id;
+        this.clazz = clazz;
+        this.conversation = conversation;
+        this.message = message;
+        this.messageSeverity = messageSeverity;
+        this.includePageParameters = includePageParameters;
+    }
+
+
+
+
+@Deprecated
+   public ConfigRedirectHandler(String id, Class clazz, boolean conversation, String message, Severity messageSeverity, boolean includePageParameters)
    {
-      this(Expressions.instance().createValueExpression(id, String.class), clazz, conversation, message, messageSeverity);
+      this(Expressions.instance().createValueExpression(id, String.class), clazz, conversation, message, messageSeverity, includePageParameters);
    }
 
    @Override
@@ -74,5 +78,11 @@ public final class ConfigRedirectHandler extends RedirectHandler
    {
       return messageSeverity;
    }
+
+    @Override
+    protected boolean includePageParameters(Exception e)
+    {
+        return includePageParameters;
+    }
 
 }

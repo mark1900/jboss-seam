@@ -1,5 +1,7 @@
 package org.jboss.seam.exception;
 
+import java.util.Map;
+
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,7 @@ public abstract class RedirectHandler extends ExceptionHandler
    protected abstract String getMessage(Exception e);
    protected abstract boolean isEnd(Exception e);
    protected abstract Severity getMessageSeverity(Exception e);
+   protected abstract boolean includePageParameters(Exception e);
 
    @Override
    public void handle(Exception e) throws Exception
@@ -48,12 +51,24 @@ public abstract class RedirectHandler extends ExceptionHandler
       
       try
       {
-         redirect(viewId, null);
+          if (includePageParameters(e))
+          {
+              Map<String, Object> parameters = Pages.instance().getStringValuesFromPageContext(FacesContext.getCurrentInstance());
+              if (e instanceof ParametricExceptionHandler)
+                  parameters = ((ParametricExceptionHandler) e).getParameters();
+              if(parameters != null)
+                  parameters.remove("actionMethod");
+              redirect(viewId, parameters);
+          }
+          else
+          {
+              redirect(viewId, null);
+          }
       }
       catch (RedirectException re)
       {
-         //do nothing
-         log.debug("could not redirect", re);
+          // do nothing
+          log.debug("could not redirect", re);
       }
    }
 

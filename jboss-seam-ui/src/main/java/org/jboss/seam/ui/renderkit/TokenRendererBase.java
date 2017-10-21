@@ -176,14 +176,20 @@ public class TokenRendererBase extends RendererBase
       String rawViewSignature = context.getExternalContext().getRequestContextPath() + "," + context.getViewRoot().getViewId() + "," + form.getClientId(context);
       if (useRenderStamp)
       {
-         String renderStamp = form.getAttributes().get(RENDER_STAMP_ATTR).toString();
+         Object stampAttr = form.getAttributes().get(RENDER_STAMP_ATTR);
+         if(stampAttr == null)
+         {
+             String viewId = context.getViewRoot().getViewId();
+             throw new UnauthorizedCommandException(viewId, "RENDER_STAMP_ATTR can not be null");
+         }
+         String renderStamp = stampAttr.toString();
          RenderStampStore store = RenderStampStore.instance();
          if (store != null)
          {
-            // if we are using the RenderStampStore the key to access the render
-            // stamp
-            // is stored in the view root instead of the actual render stamp
-            renderStamp = store.getStamp(renderStamp);
+             // if we are using the RenderStampStore the key to access the render
+             // stamp
+             // is stored in the view root instead of the actual render stamp
+             renderStamp = store.getStamp(renderStamp);
          }
          rawViewSignature += "," + renderStamp;
       }
